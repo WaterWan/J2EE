@@ -14,11 +14,11 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 
 public class Login extends HttpServlet {
-	private PreparedStatement pst;
 
 	@Override
 	public void init() throws ServletException {
@@ -28,6 +28,12 @@ public class Login extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		System.out.println("Get.............");
+		String username = null;
+		HttpSession httpSession = req.getSession();
+		username = (String) httpSession.getAttribute("username");
+		if(username == null) {
+			resp.sendRedirect("http://localhost:8080/SmallHomework2/index.html");
+		}
 	}
 
 	@Override
@@ -48,16 +54,18 @@ public class Login extends HttpServlet {
             Context envContext = (Context) initContext.lookup("java:comp/env");
             DataSource ds = (DataSource) envContext.lookup("jdbc/j2ee_shwk2");
             Connection conn = ds.getConnection();
-			System.out.println("--------数据库连接成功！！！----------");
+			System.out.println("--------Login-----数据库连接成功！！！----------");
 			String sql = "select * from users where username = ?";
-			pst = conn.prepareStatement(sql);
+			PreparedStatement pst = conn.prepareStatement(sql);
 			pst.setString(1, username);
 			ResultSet resultSet = pst.executeQuery();
 			if(resultSet.next()) {
 				if(!resultSet.getString(2).equals(password)) {
 					throw new ServletException("Wrong password!");
 				} else {
-					// TODO: 登录成功
+					HttpSession session = req.getSession(true);
+					session.setAttribute("username", username);
+					resp.sendRedirect("http://localhost:8080/SmallHomework2/ShowGoods");
 				}
 			} else {
 				throw new ServletException("No such user!");

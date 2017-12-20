@@ -61,5 +61,12 @@
 		<servlet-name>Login</servlet-name>
 		<url-pattern>/Login</url-pattern>
 	</servlet-mapping>
-
+	<servlet>
+		<servlet-name>ShowGoods</servlet-name>
+		<servlet-class>service.ShowGoods</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ShowGoods</servlet-name>
+		<url-pattern>/ShowGoods</url-pattern>
+	</servlet-mapping>
 </web-app>
