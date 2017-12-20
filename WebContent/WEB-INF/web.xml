@@ -12,7 +12,12 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
-
+	<resource-ref>
+		<description>DB Connection</description>
+		<res-ref-name>jdbc/j2ee_shwk2</res-ref-name>
+		<res-type>javax.sql.DataSource</res-type>
+		<res-auth>Container</res-auth>
+	</resource-ref>
 	<servlet>
 		<servlet-name>ErrorHandler</servlet-name>
 		<servlet-class>errordeal.ErrorHandler</servlet-class>
@@ -29,7 +34,7 @@
 	<error-page>
 		<error-code>500</error-code>
 		<location>/ErrorHandler</location>
-	</error-page>	
+	</error-page>
 	<error-page>
 		<exception-type>javax.servlet.ServletException</exception-type>
 		<location>/ErrorHandler</location>
