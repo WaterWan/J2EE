@@ -69,4 +69,11 @@
 		<servlet-name>ShowGoods</servlet-name>
 		<url-pattern>/ShowGoods</url-pattern>
 	</servlet-mapping>
+
+	<filter>
+		<display-name>ChineseFilter</display-name>
+		<filter-name>ChineseFilter</filter-name>
+		<filter-class>filter.ChineseFilter</filter-class>
+	</filter>
+
 </web-app>
