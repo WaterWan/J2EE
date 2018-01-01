@@ -12,6 +12,9 @@
 		<welcome-file>default.htm</welcome-file>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
+	<listener>
+		<listener-class>listener.CountUserListener</listener-class>
+	</listener>
 	<resource-ref>
 		<description>DB Connection</description>
 		<res-ref-name>jdbc/j2ee_shwk2</res-ref-name>

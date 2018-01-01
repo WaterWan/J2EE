@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -65,6 +66,11 @@ public class Login extends HttpServlet {
 				} else {
 					HttpSession session = req.getSession(true);
 					session.setAttribute("username", username);
+					ServletContext context = getServletContext();
+					if(null == context.getAttribute("current")) {
+						System.out.println("------------开始没有current这个属性-----------");
+						session.setAttribute("current", 1);
+					} 
 					resp.sendRedirect("http://localhost:8080/SmallHomework2/ShowGoods");
 				}
 			} else {
