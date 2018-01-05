@@ -12,9 +12,9 @@ import javax.servlet.http.HttpSession;
 import service.LoginService;
 import service.LoginServiceImpl;
 
-public class LoginController extends HttpServlet{
+public class LoginController extends HttpServlet {
 	private LoginService loginService;
-	
+
 	@Override
 	public void init() throws ServletException {
 		loginService = new LoginServiceImpl();
@@ -26,7 +26,7 @@ public class LoginController extends HttpServlet{
 		String username = null;
 		HttpSession httpSession = req.getSession();
 		username = (String) httpSession.getAttribute("username");
-		if(username == null) {
+		if (username == null) {
 			resp.sendRedirect("http://localhost:8080/SmallHomework2/index.html");
 		}
 	}
@@ -44,5 +44,6 @@ public class LoginController extends HttpServlet{
 		}
 		ServletContext context = getServletContext();
 		loginService.login(username, password, req, resp, context);
+		System.out.println("LoginController: current " + context.getAttribute("current"));
 	}
 }

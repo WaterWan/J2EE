@@ -1,4 +1,4 @@
-package service;
+package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,11 +16,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
-public class ShowGoods extends HttpServlet {
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+import service.ShowGoodsService;
+import service.ShowGoodsServiceImpl;
+
+public class ShowGoodsController extends HttpServlet{
+	private ShowGoodsService showGoodsService;
+	@Override
+	public void init() throws ServletException {
+		showGoodsService = new ShowGoodsServiceImpl();
+	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -64,7 +68,11 @@ public class ShowGoods extends HttpServlet {
 			}
 			int current = (Integer) getServletContext().getAttribute("current");
 			int visitors = (Integer) getServletContext().getAttribute("visitors");
-			getServletContext().setAttribute("visitors", visitors - 1);
+			if(null == getServletContext().getAttribute("counted")) {
+				getServletContext().setAttribute("visitors", visitors - 1);
+				getServletContext().setAttribute("counted", true);
+			}
+			
 			visitors = (Integer) getServletContext().getAttribute("visitors");
 			int login = current - visitors;
 			out.print("<br>当前用户数： " + current);
