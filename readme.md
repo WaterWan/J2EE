@@ -25,5 +25,7 @@ TODO List
 - [x] Servlet
 - [x] Session
 - [x] JDBC(用JNDI实现)
-- [ ] MVC重写功能
+- [x] MVC重写登录
+- [ ] MVC重写展示货物
+- [ ] 作业4-2重定向
 - [ ] 加一个注销功能
