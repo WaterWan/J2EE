@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -33,56 +34,11 @@ public class ShowGoodsController extends HttpServlet{
 		String username = null;
 		username = (String) httpSession.getAttribute("username");
 		if (username == null) {
-			resp.sendRedirect("http://localhost:8080/SmallHomework2/index.html");
+			resp.sendRedirect("http://localhost:8080/SmallHomework2/index.jsp");
 			return;
 		}
-		try {
-			Context initContext = new InitialContext();
-			Context envContext = (Context) initContext.lookup("java:comp/env");
-			DataSource ds = (DataSource) envContext.lookup("jdbc/j2ee_shwk2");
-			Connection conn = ds.getConnection();
-			System.out.println("--------ShowGoods-----数据库连接成功！！！----------");
-			String sql = "select * from goods where username = ?";
-			PreparedStatement pst = conn.prepareStatement(sql);
-			pst.setString(1, username);
-			ResultSet resultSet = pst.executeQuery();
-			PrintWriter out = resp.getWriter();
-			String start = "<!DOCTYPE html>\r\n" + "<html>\r\n" + "<body>";
-			String end = "</body>\r\n" + "</html>";
-			out.println(start);
-			if (!resultSet.next()) {
-				out.println("No goods in this user!!!");
-			} else {
-				resultSet.previous();
-				while(resultSet.next()) {
-					String goodsName = resultSet.getString(2);
-					double price = resultSet.getDouble(3);
-					int count = resultSet.getInt(4);
-					Date date = resultSet.getDate(5);
-					out.println(goodsName + " " + price + " " + count + " " + date);
-					if(count > 10) {
-						out.print("(Not enough)");
-					}
-					out.println("<br>");
-				}
-			}
-			int current = (Integer) getServletContext().getAttribute("current");
-			int visitors = (Integer) getServletContext().getAttribute("visitors");
-			if(null == getServletContext().getAttribute("counted")) {
-				getServletContext().setAttribute("visitors", visitors - 1);
-				getServletContext().setAttribute("counted", true);
-			}
-			
-			visitors = (Integer) getServletContext().getAttribute("visitors");
-			int login = current - visitors;
-			out.print("<br>当前用户数： " + current);
-			out.print("<br>当前登录数： " + login);
-			out.print("<br>当前游客数： " + visitors);
-			out.println(end);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
+		ServletContext context = getServletContext();
+		resp.sendRedirect("http://localhost:8080/SmallHomework2/goods.jsp?username=" + username);
 	}
 
 	@Override
