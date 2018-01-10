@@ -9,10 +9,22 @@ public class CountUserListener implements HttpSessionListener {
     static int current = 0;
     static int visitors = 0;
     public void sessionCreated(HttpSessionEvent e) {
+    	ctx = e.getSession().getServletContext();
+    	if(null == ctx.getAttribute("current")) {
+    		current = 0;
+    		visitors = 0;
+    	} else {
+    		current = (Integer)ctx.getAttribute("current");
+    		visitors = (Integer)ctx.getAttribute("visitors");
+    	}
     	System.out.println("--------------新增加一个Session-----------------");
+    	System.out.println("--------------之前的在线人数：" + current + "-----------");
+    	System.out.println("--------------之前的游客人数：" + visitors + "-----------");
         current++;
         visitors++;
-        ctx = e.getSession().getServletContext();
+    	System.out.println("--------------之后的在线人数：" + current + "-----------");
+    	System.out.println("--------------之后的游客人数：" + visitors + "-----------");
+        
         ctx.setAttribute("current", current);
         ctx.setAttribute("visitors", visitors);
     }

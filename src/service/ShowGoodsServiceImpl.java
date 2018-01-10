@@ -46,9 +46,10 @@ public class ShowGoodsServiceImpl implements ShowGoodsService{
 			
 			int current = (Integer) context.getAttribute("current");
 			int visitors = (Integer) context.getAttribute("visitors");
-			if(null == context.getAttribute("counted")) {
+			if(null == req.getSession().getAttribute("counted")) {
+				System.out.println("-----------------游客数减少一个----------------");
 				context.setAttribute("visitors", visitors - 1);
-				context.setAttribute("counted", true);
+				req.getSession().setAttribute("counted", true);
 			}
 			visitors = (Integer) context.getAttribute("visitors");
 			int login = current - visitors;
