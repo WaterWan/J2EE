@@ -21,7 +21,7 @@ public class LoginServiceImpl implements LoginService {
 
 	@Override
 	public void login(String username, String password, HttpServletRequest req, HttpServletResponse resp, ServletContext context) throws ServletException, IOException {
-		String newUsername = userDao.login(username, password);
+		String newUsername = userDao.find(username, password);
 		if(null == newUsername) {
 			throw new ServletException("No such user!");
 		} else {

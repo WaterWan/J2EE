@@ -28,7 +28,7 @@ public class ShowGoodsServiceImpl implements ShowGoodsService{
 			String start = "<!DOCTYPE html>\r\n" + "<html>\r\n" + "<body>";
 			String end = "</body>\r\n" + "</html>";
 			out.println(start);
-			
+			System.out.println("-----ShowGoods-----查询前");
 			List<Goods> goods = goodsDao.findGoodsByUsername(username);
 			if(goods.size() == 0) {
 				out.println("No goods in this user! <br>");
@@ -42,7 +42,7 @@ public class ShowGoodsServiceImpl implements ShowGoodsService{
 					out.println("<br>");
 				}
 			}
-			
+			System.out.println("-----ShowGoods-----查询后");
 			
 			int current = (Integer) context.getAttribute("current");
 			int visitors = (Integer) context.getAttribute("visitors");

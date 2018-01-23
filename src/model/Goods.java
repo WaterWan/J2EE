@@ -2,10 +2,20 @@ package model;
 
 import java.sql.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+@Entity
+@Table(name = "goods")
 public class Goods {
+	@Id
+	@Column(name = "goods_name")
 	private String goodsName;
-	private double price;
-	private int count;
+	private Double price;
+	@Column(name = "count")
+	private Integer count;
+	@Column(name = "order_time")
 	private Date date;
 	public String getGoodsName() {
 		return goodsName;
@@ -36,5 +46,8 @@ public class Goods {
 		this.price = price;
 		this.count = count;
 		this.date = date;
+	}
+	
+	public Goods() {
 	}
 }
