@@ -8,11 +8,14 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import dao.GoodsDao;
 import dao.GoodsDaoImpl;
 import model.Goods;
 
 public class ShowGoodsServiceImpl implements ShowGoodsService{
+	@Autowired
 	private GoodsDao goodsDao;
 	public ShowGoodsServiceImpl() {
 		goodsDao = new GoodsDaoImpl();

@@ -4,10 +4,11 @@ import javax.servlet.ServletException;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Service;
 
 import model.User;
 import utils.HibernateUtil;
-
+@Service
 public class UserDaoImpl extends BaseDaoImpl implements UserDao{
 
 	@Override

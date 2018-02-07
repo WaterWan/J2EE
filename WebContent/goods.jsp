@@ -1,3 +1,4 @@
+<%@page import="org.springframework.beans.factory.annotation.Autowired"%>
 <%@page import="service.ShowGoodsServiceImpl"%>
 <%@page import="service.ShowGoodsService"%>
 <%@page import="dao.GoodsDao"%>

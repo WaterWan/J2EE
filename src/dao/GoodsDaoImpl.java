@@ -4,10 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.query.Query;
+import org.springframework.stereotype.Service;
 
 import model.Goods;
 import utils.HibernateUtil;
-
+@Service
 public class GoodsDaoImpl implements GoodsDao {
 	@Override
 	public List<Goods> findGoodsByUsername(String username) {
